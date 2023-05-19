@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Página de mis mascotas</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+        
+        body {
+            background-color: #EFEDFF;
+            font-family: Arial, sans-serif;
+        }
+        
+        .header {
+            background-color: #a69af7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            padding: 5px 10%;
+            color: #EFEFF0;
+        }
+        
+        .container {
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ada5e2;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .container h2 {
+            margin-bottom: 10px;
+        }
+        
+        .container p {
+            line-height: 1.5;
+            color: #555555;
+            text-align: justify;
+        }
+        
+        .image-center {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .container-left {
+            margin-right: 20px; /* Espacio entre los contenedores */
+        }
+        
+        .container-right {
+            margin-left: 20px; /* Espacio entre los contenedores */
+        }
+        
+        .container-perros {
+            background-color: #DDA0DD; /* Color de fondo para los perros */
+        }
+        
+        .container-gatos {
+            background-color: #B0E0E6; /* Color de fondo para los gatos */
+        }
+        
+        .contenedor-perros-gatos {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .contenedor-perros-gatos .container {
+            flex-basis: calc(50% - 10px);
+            margin-bottom: 0;
+        }
+        
+        .image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .image-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .image-buttons button {
+            margin: 0 5px;
+        }
+        .slideshow-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Perros y Gatos</h1>
+        </div>
+    </header>
+
+    <div class="contenedor-perros-gatos">
+        <div class="container container-perros">
+            <h2>Perros</h2>
+            <p>Desempeñó un rol muy importante en la historia de la civilización humana debido a que fue uno de los primeros animales en ser domesticado. Lleva más de 20.000 años acompañando al ser humano y se estima que existen unas 400 razas distintas de perros en todo el mundo.</p>
+            <div class="image-container">
+                <img class="slideshow-image" src="" alt="Imagen de un perro">
+                <div class="image-buttons">
+                    <button onclick="previousImagePerro()">Anterior</button>
+                    <button onclick="nextImagePerro()">Siguiente</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container container-gatos">
+            <h2>Gatos</h2>
+            <p>Los gatos se comunican marcando árboles, postes o muebles con sus zarpas o con su orín. Dejar su rastro es el modo que tienen de informar a otros del alcance de su territorio.</p>
+            <div class="image-container">
+                <img class="slideshow-image" src="" alt="Imagen de un gato">
+                <div class="image-buttons">
+                    <button onclick="previousImageGato()">Anterior</button>
+                    <button onclick="nextImageGato()">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Definir las URLs de las imágenes en arreglos separados para Perros y Gatos
+        const perroImageUrls = [
+            "blanco.png",
+            "Perro-cachorro.png",
+            "feliz.png",
+            "NOTEVEO.png",
+            "yonojui.png"
+        ];
+
+        const gatoImageUrls = [
+            "GAtito.png",
+            "alanada.png",
+            "mirada.png",
+            "gatua.png",
+            "guapo.png"
+        ];
+
+        // Obtener elementos de imagen y botones
+        const perroImageElement = document.querySelector(".container-perros .slideshow-image");
+        const gatoImageElement = document.querySelector(".container-gatos .slideshow-image");
+
+        let perroCurrentIndex = 0;
+        let gatoCurrentIndex = 0;
+
+        // Funciones para cambiar la imagen actual de Perros
+        function previousImagePerro() {
+            perroCurrentIndex--;
+            if (perroCurrentIndex < 0) {
+                perroCurrentIndex = perroImageUrls.length - 1;
+            }
+            perroImageElement.src = perroImageUrls[perroCurrentIndex];
+        }
+
+        function nextImagePerro() {
+            perroCurrentIndex++;
+            if (perroCurrentIndex >= perroImageUrls.length) {
+                perroCurrentIndex = 0;
+            }
+            perroImageElement.src = perroImageUrls[perroCurrentIndex];
+        }
+
+        // Funciones para cambiar la imagen actual de Gatos
+        function previousImageGato() {
+            gatoCurrentIndex--;
+            if (gatoCurrentIndex < 0) {
+                gatoCurrentIndex = gatoImageUrls.length - 1;
+            }
+            gatoImageElement.src = gatoImageUrls[gatoCurrentIndex];
+        }
+
+        function nextImageGato() {
+            gatoCurrentIndex++;
+            if (gatoCurrentIndex >= gatoImageUrls.length) {
+                gatoCurrentIndex = 0;
+            }
+            gatoImageElement.src = gatoImageUrls[gatoCurrentIndex];
+        }
+
+        // Cargar la primera imagen de cada categoría al cargar la página
+        perroImageElement.src = perroImageUrls[perroCurrentIndex];
+        gatoImageElement.src = gatoImageUrls[gatoCurrentIndex];
+    </script>
+</body>
+</html>
