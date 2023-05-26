@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Respuesta del Formulario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #798ebe7b;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #333333;
+      margin-top: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #666666;
+      margin-top: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #333333;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #4e8cff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .security-alert {
+      font-size: 16px;
+      color: red;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function calcularEdad(fechaNacimiento) {
+      var hoy = new Date();
+      var fechaNac = new Date(fechaNacimiento);
+      var edad = hoy.getFullYear() - fechaNac.getFullYear();
+      var mes = hoy.getMonth() - fechaNac.getMonth();
+      if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+        edad--;
+      }
+      return edad;
+    }
+
+    function mostrarRespuesta() {
+      // Obtener los parámetros del formulario de la URL
+      function getParameter(key) {
+        var address = window.location.search;
+        var parameterList = new URLSearchParams(address);
+        return parameterList.get(key);
+      }
+
+      // Obtener los valores de los parámetros del formulario
+      var nombres = getParameter('nombres');
+      var apellido1 = getParameter('apellido1');
+      var apellido2 = getParameter('apellido2');
+      var correo = getParameter('correo');
+      var fechaNacimiento = getParameter('fechaNacimiento');
+      var telefono = getParameter('telefono');
+      var contrasena = getParameter('contrasena');
+
+      // Mostrar los valores en el documento HTML
+      var nombresElement = document.createElement('h1');
+      nombresElement.textContent = nombres;
+      document.body.appendChild(nombresElement);
+
+      var apellidosElement = document.createElement('h2');
+      apellidosElement.textContent = apellido1 + ' ' + apellido2;
+      document.body.appendChild(apellidosElement);
+
+      var correoElement = document.createElement('p');
+      correoElement.innerHTML = 'Correo: <a href="mailto:' + correo + '">' + correo + '</a>';
+      document.body.appendChild(correoElement);
+
+      var telefonoElement = document.createElement('p');
+      telefonoElement.innerHTML = 'Teléfono: <a href="tel:' + telefono + '">' + telefono + '</a>';
+      document.body.appendChild(telefonoElement);
+
+      var edadElement = document.createElement('p');
+      var edad = calcularEdad(fechaNacimiento);
+      edadElement.textContent = 'Edad: ' + edad + ' años';
+      document.body.appendChild(edadElement);
+
+      if (contrasena.length < 5) {
+        var seguridadElement = document.createElement('p');
+        seguridadElement.classList.add('security-alert');
+        seguridadElement.textContent = '¡Atención! Tu contraseña NO es segura.';
+        document.body.appendChild(seguridadElement);
+      }
+    }
+
+    mostrarRespuesta();
+  </script>
+</body>
+</html>
